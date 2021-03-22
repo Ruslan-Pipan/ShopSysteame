@@ -56,6 +56,6 @@ I used the pattern "Fasad". To when added new goods consumer recived notify.
 
 ## Work with DB:
 All works with DB I implemented by using Hibernate, and Spring DAO.
-
+![alt](https://github.com/Ruslan-Pipan/ShopSysteame/blob/Ruslan/src/screenshot/Dao.JPG)
 ## To summarize: 
 On this project, I gained knowledge to work with Spring frameworks: Spring MVC, Spring IoC, Spring DATA, Spring Boot, and Hibernate.
