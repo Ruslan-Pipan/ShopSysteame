@@ -28,6 +28,18 @@ A free HTML, CSS, and JS web store template has been found. Implemented all the 
 
 + "DefaultBasket" - Implement "Basket".
 
++ "HotDeal" - Presents goods which have a discout with a timer to end discound.
+
++ "Items" - Its goods
+
++ "CategoryItems" 
+
++ "Statistic" - Statistic of goods.
+
++ "ItemRepository"
+
++ "CategoryRepository"
+ 
 ## Email notifier when add: 
 I used the pattern "Fasad".
 ![alt](https://github.com/Ruslan-Pipan/ShopSysteame/blob/Ruslan/src/screenshot/Fasad.JPG)
