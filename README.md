@@ -41,5 +41,18 @@ A free HTML, CSS, and JS web store template has been found. Implemented all the 
 + "CategoryRepository"
  
 ## Email notifier when add: 
-I used the pattern "Fasad".
+I used the pattern "Fasad". To when added new goods consumer recived notify.
 ![alt](https://github.com/Ruslan-Pipan/ShopSysteame/blob/Ruslan/src/screenshot/Fasad.JPG)
+
++ "AddItemNotifierConsumerFacade" - Add new goods to DB, and notify consumers.
+
++ "ItenRepository" - Used for added new goods to DB.
+
++ "Mail" - Its mail which receive Consumer.
+
++ "EmailService" - The interface which responsible for send emails.
+
++ "NewProductNotifierEmailService" - Implemented "EmailServise" to send notifications to consumers about new goods.
+
+## To summarize: 
+On this project, I gained knowledge to work with Spring frameworks: Spring MVC, Spring IoC, Spring DATA, Spring Boot, and Hibernate.
