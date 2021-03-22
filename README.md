@@ -54,5 +54,8 @@ I used the pattern "Fasad". To when added new goods consumer recived notify.
 
 + "NewProductNotifierEmailService" - Implemented "EmailServise" to send notifications to consumers about new goods.
 
+## Work with DB:
+All works with DB I implemented by using Hibernate, and Spring DAO.
+
 ## To summarize: 
 On this project, I gained knowledge to work with Spring frameworks: Spring MVC, Spring IoC, Spring DATA, Spring Boot, and Hibernate.
