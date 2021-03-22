@@ -1,0 +1,335 @@
+<!doctype html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="fragment/linkCssAndTitle"></head>
+
+
+    <body>
+        <!-- Add your site or application content here -->
+		<header th:replace="fragment/header" class="header-area">
+
+		</header>
+
+		<!-- START PAGE-CONTENT -->
+		<section class="page-content">
+			<div class="container">
+	            <div class="row">
+					<div class="col-md-12">
+						<ul class="page-menu">
+							<li><a th:href="@{/index.html}" href="/index.html">Home</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<div th:replace="fragment/left-category-menu" class="left-category-menu"></div>
+						<div th:replace="fragment/bestseller" class="small-product-area"></div>
+
+						<!-- START SIDEBAR-BANNER -->
+	                    <div class="sidebar-banner hidden-sm hidden-xs">
+	                    	<div class="active-sidebar-banner">
+	                    		<div class="single-sidebar-banner">
+	                    			<a href="#"><img src="/img/banner/1.jpg" alt="Product Banner"></a>
+	                    		</div>
+	                    		<div class="single-sidebar-banner">
+	                    			<a href="#"><img src="/img/banner/2.jpg" alt="Product Banner"></a>
+	                    		</div>
+	                    	</div>
+	                    </div>
+	                    <!-- END SIDEBAR-BANNER -->
+					</div>
+					<div class="col-md-9 col-sm-12 col-xs-12">
+						<!-- Start Toch-Prond-Area -->
+						<div class="toch-prond-area">
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-12">
+									<div class="clear"></div>
+									<div class="tab-content">
+										<!-- Product = display-1-1 -->
+										<div role="tabpanel" class="tab-pane fade in active" id="display-1">
+											<div class="row">
+												<div class="col-xs-12">
+													<div class="toch-photo">
+														<a href="#"><img th:src="${itemDetail.getImgMain()}" src="/mg/toch/1.jpg" data-imagezoom="true" alt="#" /></a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- End Product = display-1-1 -->
+										<!-- Start Product = display-1-2 -->
+										<div role="tabpanel" class="tab-pane fade" id="display-2">
+											<div class="row">
+												<div class="col-xs-12">
+													<div class="toch-photo">
+														<a href="#"><img th:src="${itemDetail.getImgSecond()}" src="/img/toch/2.jpg" data-imagezoom="true" alt="#" /></a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- End Product = display-1-2 -->
+										<!-- Start Product = di3play-1-3 -->
+<!--										<div role="tabpanel" class="tab-pane fade" id="display-3">-->
+<!--											<div class="row">-->
+<!--												<div class="col-xs-12">-->
+<!--													<div class="toch-photo">-->
+<!--														<a href="#"><img src="/img/toch/3.jpg" data-imagezoom="true" alt="#" /></a>-->
+<!--													</div>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										&lt;!&ndash; End Product = display-1-3 &ndash;&gt;-->
+<!--										&lt;!&ndash; Start Product = di3play-1-4 &ndash;&gt;-->
+<!--										<div role="tabpanel" class="tab-pane fade" id="display-4">-->
+<!--											<div class="row">-->
+<!--												<div class="col-xs-12">-->
+<!--													<div class="toch-photo">-->
+<!--														<a href="#"><img src="/img/toch/4.jpg" data-imagezoom="true" alt="#" /></a>-->
+<!--													</div>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										&lt;!&ndash; End Product = display-1-4 &ndash;&gt;-->
+									</div>
+									<!-- Start Toch-prond-Menu -->
+									<div class="toch-prond-menu">
+										<ul role="tablist">
+											<li role="presentation" class=" active"><a href="#display-1" role="tab" data-toggle="tab"><img th:src="${itemDetail.getImgMain()}" src="/img/toch/1.jpg" alt="#" /></a></li>
+											<li role="presentation"><a href="#display-2" role="tab" data-toggle="tab"><img th:src="${itemDetail.getImgSecond()}" src="/img/toch/2.jpg" alt="#" /></a></li>
+										</ul>
+									</div>
+									<!-- End Toch-prond-Menu -->
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-12">
+									<h2 th:text="${itemDetail.getNameItem()}" class="title-product"> Toch Prond</h2>
+
+									<div class="about-toch-prond">
+										<p>
+											<span class="rating">
+												<i th:each="number : ${#numbers.sequence(1,itemDetail.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+													<th:block th:if="${itemDetail.getStatistic().getRating() < 5}">
+														<i th:each="number : ${#numbers.sequence(1, 5 - itemDetail.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+													</th:block>
+											</span>
+
+										</p>
+										<hr />
+										<p class="short-description" th:text="${itemDetail.getDescription()}">Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nul... </p>
+										<hr />
+										<span class="current-price" th:text="${itemDetail.getPrise() - itemDetail.getPrise() * itemDetail.getStatistic().getDiscount() / 100}">$100.00</span>
+										<span class="item-stock">Availability: <span class="text-stock">In Stock</span></span>
+									</div>
+									<div class="about-product">
+<!--										<div class="product-select product-color">-->
+<!--											<label><sup>*</sup>Color</label>-->
+<!--											<select class="form-control">-->
+<!--												<option> -&#45;&#45; Please Select -&#45;&#45; </option>-->
+<!--												<option>Black (+$10.00) </option>-->
+<!--												<option>White (+$8.00)</option>-->
+<!--												<option>Pink (+$30.00)</option>-->
+<!--												<option>Green (+$30.00)</option>-->
+<!--											</select>-->
+<!--										</div>-->
+<!--										<div class="product-select product-Size">-->
+<!--											<label><sup>*</sup>Size</label>-->
+<!--											<select class="form-control">-->
+<!--												<option> -&#45;&#45; Please Select -&#45;&#45; </option>-->
+<!--												<option>Small (+$10.00)</option>-->
+<!--												<option>Medium (+$20.00)</option>-->
+<!--												<option>Large (+$30.00)</option>-->
+<!--												<option>Extra Large (+$35.00)</option>-->
+<!--											</select>-->
+<!--										</div>-->
+										<div class="product-select product-type">
+											<label><sup>*</sup>Text</label>
+											<input type="text"  class="form-control" placeholder="Text"/>
+										</div>
+										<div class="product-select product-date">
+											<label><sup>*</sup>Date</label>
+											<input type="text"  class="form-control" placeholder="2016/02/15"/>
+										</div>
+										<div class="product-select product-checkbox">
+											<label><sup>*</sup>Checkbox</label>
+											<label><input type="checkbox" /> Checkbox 1  (+$5.00)</label>
+										</div>
+										<div class="product-select product-button">
+											<button type="submit" >
+												<i class="fa fa-calendar"></i>
+											</button>
+										</div>
+									</div>
+									<div class="product-quantity">
+										<span>Qty</span>
+										<input type="number" placeholder="1" />
+										<button type="submit" class="toch-button toch-add-cart">Add to Cart</button>
+										<button type="submit" class="toch-button toch-wishlist">wishlist</button>
+										<button type="submit" class="toch-button toch-compare">Compare</button>
+										<hr />
+
+									</div>
+								</div>
+							</div>
+							<!-- Start Toch-Box -->
+
+
+							<div class="toch-box">
+								<div class="row">
+									<div class="col-xs-12">
+										<!-- Start Toch-Menu -->
+										<div class="toch-menu">
+											<ul role="tablist">
+												<li role="presentation" class=" active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
+												<li role="presentation"><a href="#reviews" role="tab" data-toggle="tab" th:text="'Reviews (' + ${itemDetail.statistic.getReviews()} + ')'">Reviews (1)</a></li>
+											</ul>
+										</div>
+										<!-- End Toch-Menu -->
+										<div class="tab-content toch-description-review">
+											<!-- Start display-description -->
+											<div role="tabpanel" class="tab-pane fade in active" id="description">
+												<div class="row">
+													<div class="col-xs-12">
+														<div class="toch-description">
+															<p th:text="${itemDetail.getDescription()}">Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt.
+															Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt.
+															Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt.
+															Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt.
+															Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt.
+															Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt.
+															</p>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- End display-description -->
+
+											<!-- Start display-reviews -->
+											<div role="tabpanel" class="tab-pane fade" id="reviews">
+												<div class="row">
+													<div class="col-xs-12">
+														<div class="toch-reviews">
+															<div class="toch-table">
+																<table class="table table-striped table-bordered">
+																	<tbody>
+																		<tr>
+																			<td><strong>plaza theme</strong></td>
+																			<td class="text-right"><strong>16/02/2016</strong></td>
+																		</tr>
+																		<tr>
+																			<td colspan="2">
+																				<p>It is part of Australia's network of offshore processing centres for irregular migrants who arrive by boat, and also houses New Zealanders facing deportation from Australia.</p>
+																				<span><i class="fa fa-star"></i></span>
+																				<span><i class="fa fa-star"></i></span>
+																				<span><i class="fa fa-star"></i></span>
+																				<span><i class="fa fa-star"></i></span>
+																				<span><i class="fa fa-star-o"></i></span>
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+															<div class="toch-review-title">
+																<h2>Write a review</h2>
+															</div>
+															<div class="review-message">
+																<div class="col-xs-12">
+																	<p><sup>*</sup>Your Name <br>
+																		<input type="text" class="form-control" />
+																	</p>
+																	<p><sup>*</sup>Your Name <br>
+																		<textarea class="form-control"></textarea>
+																	</p>
+																</div>
+																<div class="help-block">
+																	<span class="note">Note:</span>
+																	 HTML is not translated!
+																</div>
+																<div class="get-rating">
+																	<span><sup>*</sup>Rating </span>
+																	Bad
+																	<input type="radio" value="1" name="rating" />
+																	<input type="radio" value="2" name="rating" />
+																	<input type="radio" value="3" name="rating" />
+																	<input type="radio" value="4" name="rating" />
+																	<input type="radio" value="5" name="rating" />
+																	Good
+																</div>
+																<div class="buttons clearfix">
+																	<button class="btn btn-primary pull-right">Continue</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- End Product = display-reviews -->
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Toch-Box -->
+							<!-- START PRODUCT-AREA -->
+							<div class="product-area">
+								<div class="row">
+									<div class="col-xs-12 col-md-12">
+										<!-- Start Product-Menu -->
+										<div class="product-menu">
+											<div class="product-title">
+												<h3 class="title-group-2 gfont-1">Related Products</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- End Product-Menu -->
+								<div class="clear"></div>
+								<!-- Start Product -->
+								<div class="product carosel-navigation">
+									<div class="row">
+										<div class="active-product-carosel">
+											<!-- Start Single-Product -->
+											<div class="col-xs-12" th:each="item : ${related}">
+												<div class="single-product">
+													<div class="product-img">
+														<a href="">
+															<img class="primary-img" th:src="${item.getImgMain()}" src="/img/product/mediam/3bg.jpg" alt="Product">
+														</a>
+													</div>
+													<div class="product-description">
+														<h5><a href="" th:text="${item.getShortName()}">Various Versions</a></h5>
+														<div class="price-box">
+															<span class="price" th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}">$80.00</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- End Single-Product -->
+										</div>
+									</div>
+
+								</div>
+								<!-- End Product -->
+							</div>
+							<!-- END PRODUCT-AREA -->
+						</div>
+						<!-- End Toch-Prond-Area -->
+					</div>
+				</div>
+			</div>
+
+		<!-- START BRAND-LOGO-AREA -->
+		<div th:replace="fragment/overFooter" class="overFooter">
+
+		</div>
+
+		</section>
+		<!-- END HOME-PAGE-CONTENT -->
+
+		<footer th:replace="fragment/footer">
+
+		</footer>
+
+
+		<script th:replace="fragment/jqueryScript">
+
+		</script>
+
+	</body>
+</html>

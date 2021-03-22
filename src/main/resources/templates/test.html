@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+   <p th:text="${category.getName()}"></p>
+    <p th:each="item : ${item}" th:text="${item.getId()}"></p>
+</body>
+</html>

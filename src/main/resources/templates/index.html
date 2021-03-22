@@ -1,0 +1,636 @@
+<!doctype html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragment/linkCssAndTitle"></head>
+    <body>
+		<header th:replace="fragment/header">
+		</header>
+		<!-- Category slider area start -->
+		<div class="category-slider-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<div th:replace="fragment/left-category-menu" class="left-category-menu"></div>
+	                </div>
+	                <div class="col-md-9">
+                		<!-- slider -->
+						<div class="slider-area">
+							<div class="bend niceties preview-1">
+								<div id="ensign-nivoslider" class="slides">	
+									<img th:each="slide : ${@defaultSlider.getSlider()}" th:src="${slide.getImg()}" th:title="'#slider-direction-' + ${slide.getPositions()}" title="#slider-direction-2"/>
+								</div>
+								<!-- direction 1 -->
+								<div th:each="slide : ${@defaultSlider.getSlider()}" th:id="'slider-direction-' + ${slide.getPositions()}" id="slider-direction-2" class="t-lfr slider-direction">
+									<div class="slider-progress"></div>
+									<!-- layer 1 -->
+									<div th:class="'layer-' + ${slide.getPositions()} + '-1'" class="layer-2-1 ">
+										<h1 th:text="${slide.getLayer1()}" class="title1">LUMIA 888 DESIGN</h1>
+									</div>
+									<!-- layer 2 -->
+									<div th:class="'layer-' + ${slide.getPositions()} + '-2'" class="layer-2-2">
+										<p th:text="${slide.getLayer2()}" class="title2">Elegant design for business</p>
+									</div>
+									<!-- layer 3 -->
+									<div th:class="'layer-' + ${slide.getPositions()} + '-3'" class="layer-2-3">
+										<h2 th:text="${slide.getLayer3()}" class="title3">$966.82</h2>
+									</div>
+									<!-- layer 4 -->
+									<div class="layer-1-4">
+										<a href="#" class="title4">shopping now</a>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+						<!-- slider end-->
+	                </div>
+	            </div>
+			</div>
+		</div>
+		<!-- Category slider area End -->		
+		<!-- START PAGE-CONTENT -->
+		<section class="page-content">
+			<div class="container">
+	            <div class="row">
+	            	<div class="col-md-3 col-sm-3">
+	                    <!-- START HOT-DEALS-AREA -->
+	            		<div class="hot-deals-area carosel-circle">
+	            			<div class="row">
+								<div class="col-md-12">
+									<div class="area-title">
+										<h3 class="title-group border-red gfont-1">Hot Deals</h3>
+									</div>
+								</div>
+							</div>
+	                    	<div class="row">
+		                    	<div class="active-hot-deals">
+		                    		<!-- Start Single-hot-deals -->
+		                    		<div class="col-xs-12" th:each="hotDeals : ${@hotDealsListByMaxDiscount.getHotDeals()}">
+			                    		<div class="single-hot-deals">
+			                    			<div class="hot-deals-photo">
+			                    				<a th:href="'/product/' + ${hotDeals.item.getId()}" href="#"><img th:src="${hotDeals.item.getImgMain()}" src="img/hot-deals/1.jpg" alt="Product"></a>
+			                    			</div>
+			                    			<div class="count-down">
+							                    <div class="timer">
+							                        <div th:attr="data-countdown=${hotDeals.getLocalTime()}" data-countdown="2022/12/31"></div>
+								                </div> 
+			                    			</div>
+			                    			<div class="hot-deals-text">
+			                    				<h5><a th:href="'/product/' + ${hotDeals.item.getId()}" href="#" class="name-group" th:text="${hotDeals.getName()}">Various Versions</a></h5>
+			                    				<span class="rating">
+													<i class="fa fa-star" th:each="number : ${#numbers.sequence(1, hotDeals.getRating(), 1)}"></i>
+													<th:block th:if="${hotDeals.getRating() < 5}">
+														<i th:each="number: ${#numbers.sequence(1, 5 - hotDeals.getRating(), 1)}" class="fa fa-star-o"></i>
+													</th:block>
+												</span>
+			                    				<div class="price-box">
+			                    					<span class="price gfont-2" th:text="${hotDeals.getPriseWithDiscount()}">$99.00</span>
+			                    					<span class="old-price gfont-2" th:text="${hotDeals.getDiscount()}">$110.00</span>
+			                    				</div>
+			                    			</div>
+			                    		</div>
+		                    		</div>
+		                    		<!-- End Single-hot-deals -->
+		                    	</div>
+	                    	</div>
+	                    </div>
+	                    <!-- END HOT-DEALS-AREA -->
+
+						<div th:replace="fragment/bestseller" class="small-product-area"></div>
+
+	                    <!-- START SIDEBAR-BANNER -->
+	                    <div class="sidebar-banner">
+	                    	<div class="active-sidebar-banner">
+	                    		<div class="single-sidebar-banner">
+	                    			<a href="#"><img src="img/banner/1.jpg" alt="Product Banner"></a>
+	                    		</div>
+	                    		<div class="single-sidebar-banner">
+	                    			<a href="#"><img src="img/banner/2.jpg" alt="Product Banner"></a>
+	                    		</div>
+	                    	</div>
+	                    </div>
+	                    <!-- END SIDEBAR-BANNER -->
+	                    <!-- START RECENT-POSTS -->
+	                    <div class="shop-blog-area sidebar">
+	                    	<div class="row">
+	                    		<div class="col-md-12">
+	                    			<h3 class="title-group border-red gfont-1">RECENT POSTS </h3>
+	                    		</div>
+	                    	</div>
+	                    	<div class="row">
+		                    	<div class="active-recent-posts carosel-circle">
+
+		                    		<!-- Start Single-Recent-Posts -->
+		                    		<div th:each="post : ${@fillerPost.getPosts()}" class="col-xs-12">
+			                    		<div class="single-recent-posts">
+			                    			<div class="recent-posts-photo">
+			                    				<img th:attr="src=${post.getUrlImages()}" src="img/posts/1.jpg" alt="Recent Posts">
+			                    			</div>
+			                    			<div class="recent-posts-text">
+			                    				<h5><a th:attr="href=${post.getOriginalUrl()}" th:text="${post.getNamePost()}" href="#" class="recent-posts-title"></a></h5>
+			                    				<span th:text="${post.getDateAndAuthor()}" class="recent-posts-date">23/12/2015 | BootExpert Theme</span>
+<!--			                    				<p class="posts-short-brif">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>-->
+			                    				<a th:attr="href = ${post.getOriginalUrl()}" href="#" class="posts-read-more">Read more ...</a>
+			                    			</div>
+			                    		</div>
+		                    		</div>
+		                    		<!-- End Single-Recent-Posts -->
+
+		                    	</div>
+	                    	</div>
+	                    </div>
+	                    <!-- END RECENT-POSTS -->
+	                </div>
+					<div class="col-md-9 col-sm-9">
+						<!-- START PRODUCT-BANNER -->
+						<div class="product-banner home1-banner">
+							<div class="row">
+								<div class="col-md-7 banner-box1">
+									<div class="single-product-banner">
+										<a href="#"><img src="img/banner/3.jpg" alt="Product Banner"></a>
+										<div class="banner-text banner-1">
+											<h2>head phone 2015</h2>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-5 banner-box2">
+									<div class="single-product-banner">
+										<a href="#"><img src="img/banner/4.jpg" alt="Product Banner"></a>
+										<div class="banner-text banner-2">
+											<h2>Deals <span>50%</span></h2>
+											<p>lumina n85</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END PRODUCT-BANNER -->
+
+
+						<!-- START PRODUCT-AREA-->
+						<div th:each="category : ${@index.getCategory()}" class="product-area">
+							<div class="row">
+								<div class="col-xs-12 col-md-12">
+									<!-- Start Product-Menu -->
+									<div class="product-menu">
+										<div class="product-title">
+											<h3 th:text="${category.getName()}" class="title-group-2 gfont-1">Electronic</h3>
+										</div>
+<!--										<ul role="tablist">-->
+<!--										    <li role="presentation" class=" active"><a href="#display-1-1" role="tab" data-toggle="tab">Speaker</a></li>-->
+<!--										    <li role="presentation"><a href="#display-1-2" role="tab" data-toggle="tab">TV</a></li>-->
+<!--										    <li role="presentation"><a href="#display-1-3"  role="tab" data-toggle="tab">Mobile</a></li>-->
+<!--										</ul>-->
+									</div>
+								</div>
+							</div>
+							<!-- End Product-Menu -->
+							<div class="clear"></div>
+							<!-- Start Product -->
+							<div class="row">
+								<div class="col-xs-12 col-md-12">
+									<div class="product carosel-navigation">
+										<div class="tab-content">
+											<!-- Product = display-1-1 -->
+											<div role="tabpanel" class="tab-pane fade in active" id="display-1-1">
+												<div class="row">
+													<div class="active-product-carosel">
+
+														<!-- Start Single-Product -->
+														<div th:each="item : ${@index.getCategoryAndItem().get(category)}" class="col-xs-12">
+															<div class="single-product">
+																<div class="label_new">
+																	<span class="new">new</span>
+																</div>
+																<div class="sale-off">
+																	<span th:text="'-' + ${item.getStatistic().getDiscount()} + '%'" class="sale-percent">-55%</span>
+																</div>
+																<div class="product-img">
+																	<a th:href="'/product/' + ${item.getId()}" href="#">
+																		<img th:src="${item.getImgMain()}" class="primary-img" src="img/product/mediam/12.jpg" alt="Product">
+																		<img th:src="${item.getImgSecond()}" class="secondary-img" src="img/product/mediam/12bg.jpg" alt="Product">
+																	</a>
+																</div>
+																<div class="product-description">
+																	<h5><a th:text="${item.getShortName()}" th:href="'/product/' + ${item.getId()}" href="#">Various Versions</a></h5>
+
+
+																	<div class="price-box">
+																		<span th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}" class="price">$99.00</span>
+																		<span th:text="${item.getPrise()} *  (${item.getStatistic().getDiscount()} / 100)" class="old-price">$120.00</span>
+																	</div>
+
+
+
+																	<span class="rating">
+																		<i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            												<th:block th:if="${item.getStatistic().getRating() < 5}">
+                                												<i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+                           													 </th:block>
+																	</span>
+																</div>
+																<div class="product-action">
+																	<div class="button-group">
+																		<div class="product-button">
+																			<form th:action="'/cart/' + ${item.getId()}" th:method="post">
+																				<button><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+																			</form>
+																		</div>
+																		<div class="product-button-2">
+																			<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-signal"></i></a>
+																			<a href="#" class="modal-view" data-toggle="modal" data-target="#productModal"><i class="fa fa-search-plus"></i></a>
+																		</div>
+																	</div>
+																</div>												
+															</div>
+														</div>
+														<!-- End Single-Product -->
+													</div>
+												</div>
+											</div>
+											<!-- End Product = display-1-1 -->
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Product -->
+						</div>
+
+						<div class="product-banner">
+							<div class="row">
+								<div class="col-md-7 banner-box1">
+									<div class="single-product-banner">
+										<a href="#"><img src="img/banner/5.jpg" alt="Product Banner"></a>
+										<div class="banner-text banner-1">
+											<h2>ApBle 4s</h2>
+											<p>Vibrant colors beautifully designed</p>
+											<span>$888.66</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-5 banner-box2">
+									<div class="single-product-banner">
+										<a href="#"><img src="img/banner/6.jpg" alt="Product Banner"></a>
+										<div class="banner-text banner-2">
+											<h2>Htc <span>N8.</span></h2>
+											<p>lumina n85</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END PRODUCT-BANNER -->
+
+						<!-- START  -->
+						<!-- START SMALL-PRODUCT-AREA (1) -->
+						<div class="small-product-area">
+							<!-- Start Product-Menu -->
+							<div class="row">
+								<div class="col-xs-12 col-md-12">
+									<div class="product-menu">
+										<ul role="tablist">
+										    <li role="presentation" class=" active"><a href="#display-4-1" role="tab" data-toggle="tab">Latest</a></li>
+										    <li role="presentation"><a href="#display-4-2" role="tab" data-toggle="tab">Sale</a></li>
+										    <li role="presentation"><a href="#display-4-3"  role="tab" data-toggle="tab">Random</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- End Product-Menu -->
+							<!-- Start Product -->
+							<div class="row">
+								<div class="col-xs-12 col-md-12">
+									<div class="product carosel-navigation">
+										<div class="tab-content">
+
+											<!-- Product = display-4-1 -->
+											<div role="tabpanel" class="tab-pane fade in active" id="display-4-1">
+												<div class="row">
+													<div class="active-small-product">
+														<!-- Start Single-Product -->
+														<div class="col-xs-12">
+															<div style="width: 263px; height: 122px" th:each="item : ${@lastItems.getItems().subList(0,3)}" class="single-product">
+																<div class="product-img">
+																	<a th:href="'/product/' + ${item.getId()}" href="#">
+																		<img style="max-width: 100px; height: 100px;" th:src="${item.getImgMain()}" class="primary-img" src="img/product/small/1.jpg" alt="Product">
+																	</a>
+																</div>
+																<div class="product-description">
+																	<h5><a th:href="'/product/' + ${item.getId()}" th:text="${item.getShortName()}" href="#">Various Versions</a></h5>
+																	<div class="price-box">
+																		<span th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}" class="price">$90.00</span>
+																		<span th:text="${item.getPrise()} *  (${item.getStatistic().getDiscount()} / 100)" class="old-price">$120.00</span>
+																	</div>
+																	<span class="rating">
+																		<i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            												<th:block th:if="${item.getStatistic().getRating() < 5}">
+                                												<i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+                           													 </th:block>
+																	</span>
+																	<div class="product-action">
+																		<div class="product-button-2">
+																			<a href="#" data-toggle="tooltip" title="Add Cart"><i class="fa fa-shopping-cart"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-signal"></i></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Start Single-Product -->
+														<div class="col-xs-12">
+															<div style="width: 263px; height: 122px" th:each="item : ${@lastItems.getItems().subList(3,6)}" class="single-product">
+																<div class="product-img">
+																	<a th:href="'/product/' + ${item.getId()}" href="#">
+																		<img style="max-width: 100px; height: 100px;" th:src="${item.getImgMain()}" class="primary-img" src="img/product/small/1.jpg" alt="Product">
+																	</a>
+																</div>
+																<div class="product-description">
+																	<h5><a th:href="'/product/' + ${item.getId()}" th:text="${item.getShortName()}" href="#">Various Versions</a></h5>
+																	<div class="price-box">
+																		<span th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}" class="price">$90.00</span>
+																		<span th:text="${item.getPrise()} *  (${item.getStatistic().getDiscount()} / 100)" class="old-price">$120.00</span>
+																	</div>
+																	<span class="rating">
+																		<i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            												<th:block th:if="${item.getStatistic().getRating() < 5}">
+                                												<i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+                           													 </th:block>
+																	</span>
+																	<div class="product-action">
+																		<div class="product-button-2">
+																			<a href="#" data-toggle="tooltip" title="Add Cart"><i class="fa fa-shopping-cart"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-signal"></i></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<!-- Start Single-Product -->
+														<div class="col-xs-12">
+															<div style="width: 263px; height: 122px" th:each="item : ${@lastItems.getItems().subList(6,9)}" class="single-product">
+																<div class="product-img">
+																	<a th:href="'/product/' + ${item.getId()}" href="#">
+																		<img style="max-width: 100px; height: 100px;" th:src="${item.getImgMain()}" class="primary-img" src="img/product/small/1.jpg" alt="Product">
+																	</a>
+																</div>
+																<div class="product-description">
+																	<h5><a th:href="'/product/' + ${item.getId()}" th:text="${item.getShortName()}" href="#">Various Versions</a></h5>
+																	<div class="price-box">
+																		<span th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}" class="price">$90.00</span>
+																		<span th:text="${item.getPrise()} *  (${item.getStatistic().getDiscount()} / 100)" class="old-price">$120.00</span>
+																	</div>
+																	<span class="rating">
+																		<i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            												<th:block th:if="${item.getStatistic().getRating() < 5}">
+                                												<i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+																			</th:block>
+																	</span>
+																	<div class="product-action">
+																		<div class="product-button-2">
+																			<a href="#" data-toggle="tooltip" title="Add Cart"><i class="fa fa-shopping-cart"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-signal"></i></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+											<!-- End Product = display-4-1 -->
+											<!-- Start Product = display-4-2 -->
+											<div role="tabpanel" class="tab-pane fade" id="display-4-2">
+												<div class="row">
+													<div class="active-small-product">
+														<!-- Start Single-Product -->
+														<div class="col-xs-12">
+															<div style="width: 263px; height: 122px" th:each="item : ${@lastSale.getItems().subList(0,3)}" class="single-product">
+																<div class="product-img">
+																	<a th:href="'/product/' + ${item.getId()}" href="#">
+																		<img style="max-width: 100px; height: 100px;" th:src="${item.getImgMain()}" class="primary-img" src="img/product/small/1.jpg" alt="Product">
+																	</a>
+																</div>
+																<div class="product-description">
+																	<h5><a th:href="'/product/' + ${item.getId()}" th:text="${item.getShortName()}" href="#">Various Versions</a></h5>
+																	<div class="price-box">
+																		<span th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}" class="price">$90.00</span>
+																		<span th:text="${item.getPrise()} *  (${item.getStatistic().getDiscount()} / 100)" class="old-price">$120.00</span>
+																	</div>
+																	<span class="rating">
+																		<i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            												<th:block th:if="${item.getStatistic().getRating() < 5}">
+                                												<i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+                           													 </th:block>
+																	</span>
+																	<div class="product-action">
+																		<div class="product-button-2">
+																			<a href="#" data-toggle="tooltip" title="Add Cart"><i class="fa fa-shopping-cart"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-signal"></i></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Start Single-Product -->
+														<div class="col-xs-12">
+															<div style="width: 263px; height: 122px" th:each="item : ${@lastSale.getItems().subList(3,6)}" class="single-product">
+																<div class="product-img">
+																	<a th:href="'/product/' + ${item.getId()}" href="#">
+																		<img style="max-width: 100px; height: 100px;" th:src="${item.getImgMain()}" class="primary-img" src="img/product/small/1.jpg" alt="Product">
+																	</a>
+																</div>
+																<div class="product-description">
+																	<h5><a th:href="'/product/' + ${item.getId()}" th:text="${item.getShortName()}" href="#">Various Versions</a></h5>
+																	<div class="price-box">
+																		<span th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}" class="price">$90.00</span>
+																		<span th:text="${item.getPrise()} *  (${item.getStatistic().getDiscount()} / 100)" class="old-price">$120.00</span>
+																	</div>
+																	<span class="rating">
+																		<i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            												<th:block th:if="${item.getStatistic().getRating() < 5}">
+                                												<i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+                           													 </th:block>
+																	</span>
+																	<div class="product-action">
+																		<div class="product-button-2">
+																			<a href="#" data-toggle="tooltip" title="Add Cart"><i class="fa fa-shopping-cart"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-signal"></i></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Start Single-Product -->
+														<div class="col-xs-12">
+															<div style="width: 263px; height: 122px" th:each="item : ${@lastSale.getItems().subList(6,9)}" class="single-product">
+																<div class="product-img">
+																	<a th:href="'/product/' + ${item.getId()}" href="#">
+																		<img style="max-width: 100px; height: 100px;" th:src="${item.getImgMain()}" class="primary-img" src="img/product/small/1.jpg" alt="Product">
+																	</a>
+																</div>
+																<div class="product-description">
+																	<h5><a th:href="'/product/' + ${item.getId()}" th:text="${item.getShortName()}" href="#">Various Versions</a></h5>
+																	<div class="price-box">
+																		<span th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}" class="price">$90.00</span>
+																		<span th:text="${item.getPrise()} *  (${item.getStatistic().getDiscount()} / 100)" class="old-price">$120.00</span>
+																	</div>
+																	<span class="rating">
+																		<i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            												<th:block th:if="${item.getStatistic().getRating() < 5}">
+                                												<i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+																			</th:block>
+																	</span>
+																	<div class="product-action">
+																		<div class="product-button-2">
+																			<a href="#" data-toggle="tooltip" title="Add Cart"><i class="fa fa-shopping-cart"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-signal"></i></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+											<!-- End Product = display-4-2 -->
+											<!-- Start Product = display-4-3 -->
+											<div role="tabpanel" class="tab-pane fade" id="display-4-3">
+												<div class="row">
+													<div class="active-small-product">
+														<!-- Start Single-Product -->
+														<div class="col-xs-12">
+															<div style="width: 263px; height: 122px" th:each="item : ${@randomItems.getItems().subList(0,3)}" class="single-product">
+																<div class="product-img">
+																	<a th:href="'/product/' + ${item.getId()}" href="#">
+																		<img style="max-width: 100px; height: 100px;" th:src="${item.getImgMain()}" class="primary-img" src="img/product/small/1.jpg" alt="Product">
+																	</a>
+																</div>
+																<div class="product-description">
+																	<h5><a th:href="'/product/' + ${item.getId()}" th:text="${item.getShortName()}" href="#">Various Versions</a></h5>
+																	<div class="price-box">
+																		<span th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}" class="price">$90.00</span>
+																		<span th:text="${item.getPrise()} *  (${item.getStatistic().getDiscount()} / 100)" class="old-price">$120.00</span>
+																	</div>
+																	<span class="rating">
+																		<i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            												<th:block th:if="${item.getStatistic().getRating() < 5}">
+                                												<i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+                           													 </th:block>
+																	</span>
+																	<div class="product-action">
+																		<div class="product-button-2">
+																			<a href="#" data-toggle="tooltip" title="Add Cart"><i class="fa fa-shopping-cart"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-signal"></i></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Start Single-Product -->
+														<div class="col-xs-12">
+															<div style="width: 263px; height: 122px" th:each="item : ${@randomItems.getItems().subList(3,6)}" class="single-product">
+																<div class="product-img">
+																	<a th:href="'/product/' + ${item.getId()}" href="#">
+																		<img style="max-width: 100px; height: 100px;" th:src="${item.getImgMain()}" class="primary-img" src="img/product/small/1.jpg" alt="Product">
+																	</a>
+																</div>
+																<div class="product-description">
+																	<h5><a th:href="'/product/' + ${item.getId()}" th:text="${item.getShortName()}" href="#">Various Versions</a></h5>
+																	<div class="price-box">
+																		<span th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}" class="price">$90.00</span>
+																		<span th:text="${item.getPrise()} *  (${item.getStatistic().getDiscount()} / 100)" class="old-price">$120.00</span>
+																	</div>
+																	<span class="rating">
+																		<i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            												<th:block th:if="${item.getStatistic().getRating() < 5}">
+                                												<i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+                           													 </th:block>
+																	</span>
+																	<div class="product-action">
+																		<div class="product-button-2">
+																			<a href="#" data-toggle="tooltip" title="Add Cart"><i class="fa fa-shopping-cart"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-signal"></i></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Start Single-Product -->
+														<div class="col-xs-12">
+															<div style="width: 263px; height: 122px" th:each="item : ${@randomItems.getItems().subList(6,9)}" class="single-product">
+																<div class="product-img">
+																	<a th:href="'/product/' + ${item.getId()}" href="#">
+																		<img style="max-width: 100px; height: 100px;" th:src="${item.getImgMain()}" class="primary-img" src="img/product/small/1.jpg" alt="Product">
+																	</a>
+																</div>
+																<div class="product-description">
+																	<h5><a th:href="'/product/' + ${item.getId()}" th:text="${item.getShortName()}" href="#">Various Versions</a></h5>
+																	<div class="price-box">
+																		<span th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}" class="price">$90.00</span>
+																		<span th:text="${item.getPrise()} *  (${item.getStatistic().getDiscount()} / 100)" class="old-price">$120.00</span>
+																	</div>
+																	<span class="rating">
+																		<i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            												<th:block th:if="${item.getStatistic().getRating() < 5}">
+                                												<i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+																			</th:block>
+																	</span>
+																	<div class="product-action">
+																		<div class="product-button-2">
+																			<a href="#" data-toggle="tooltip" title="Add Cart"><i class="fa fa-shopping-cart"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+																			<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-signal"></i></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- End Product = display-4-3 -->
+										</div>
+									</div>									
+								</div>
+							</div>
+							<!-- End Product -->
+						</div>
+						<!-- END SMALL-PRODUCT-AREA (1) -->
+
+					</div>
+				</div>
+			</div>
+
+		<div th:replace="fragment/overFooter" class="overFooter">
+
+		</div>
+
+		</section>
+		<!-- END HOME-PAGE-CONTENT -->
+
+		<footer th:replace="fragment/footer">
+
+		</footer>
+
+
+		<script th:replace="fragment/jqueryScript">
+
+		</script>
+
+    </body>
+</html>

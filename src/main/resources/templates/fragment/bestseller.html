@@ -1,0 +1,76 @@
+<!-- START SMALL-PRODUCT-AREA -->
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
+<div class="small-product-area carosel-navigation">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="area-title">
+                <h3 class="title-group gfont-1">Bestseller</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="active-bestseller sidebar">
+
+
+            <div class="col-xs-12">
+                <!-- Start Single-Product -->
+                <div th:each="item : ${@bestseller.getItems().subList(0,4)}" class="single-product">
+                    <div class="product-img" style="max-width: 140px;">
+                        <a th:href="'/product/' + ${item.getId()}" href="" style="width: 140px;">
+                            <img class="primary-img" th:src="${item.getImgMain()}" src="img/product/small/1.jpg" alt="Product">
+                        </a>
+                    </div>
+                    <div class="product-description">
+                        <h5><a th:href="'/product/' + ${item.getId()}" href="" th:text="${item.getShortName()}">Various Versions</a></h5>
+                        <div class="price-box">
+                            <span class="price" th:text="${item.getPrise()}">$99.00</span>
+<!--                            <span class="old-price">$120.00</span>-->
+                        </div>
+                        <span class="rating">
+                            <i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            <th:block th:if="${item.getStatistic().getRating() < 5}">
+                                <i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+                            </th:block>
+                        </span>
+                    </div>
+                </div>
+                <!-- End Single-Product -->
+            </div>
+
+
+
+            <div class="col-xs-12">
+                <!-- Start Single-Product -->
+                <div th:each="item : ${@bestseller.getItems().subList(4,8)}" class="single-product">
+                    <div class="product-img" style="max-width: 140px;">
+                        <a th:href="'/product/' + ${item.getId()}" href="">
+                            <img class="primary-img" th:src="${item.getImgMain()}" src="img/product/small/1.jpg" alt="Product">
+                        </a>
+                    </div>
+                    <div class="product-description">
+                        <h5><a th:href="'/product/' + ${item.getId()}" href="" th:text="${item.getShortName()}">Various Versions</a></h5>
+                        <div class="price-box">
+                            <span class="price" th:text="${item.getPrise() - item.getPrise() * item.getStatistic().getDiscount() / 100}">$99.00</span>
+                            <span th:text="${item.getPrise()} *  (${item.getStatistic().getDiscount()} / 100)" class="old-price">$120.00</span>
+                        </div>
+                        <span class="rating">
+                            <i th:each="number : ${#numbers.sequence(1,item.getStatistic().getRating(),1)}" class="fa fa-star"></i>
+                            <th:block th:if="${item.getStatistic().getRating() < 5}">
+                                <i th:each="number : ${#numbers.sequence(1, 5 - item.getStatistic().getRating(),1)}" class="fa fa-star-o"></i>
+                            </th:block>
+                        </span>
+                    </div>
+                </div>
+                <!-- End Single-Product -->
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
+</div>
+<!-- END SMALL-PRODUCT-AREA -->
